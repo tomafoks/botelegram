@@ -3,7 +3,6 @@
 
 class SettingController extends Controller
 {
-    public static $alert = '';
     function render()
     {
         $template = new Template;

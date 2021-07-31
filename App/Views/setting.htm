@@ -1,0 +1,45 @@
+<div>
+    <div class="card-body">
+        <form action="{{ 'backend_setting_store' | alias }}" method="post">
+            <h3>
+                <p>URL callback для telegram bot</p>
+            </h3>
+            <div class="input-group input-group-lg mb-3">
+                <div class="input-group-prepend">
+                    <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown"
+                        aria-expanded="false">
+                        Действие
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item">
+                            <a href="#" onclick="document.getElementById('url_callback_bot').
+                                                    value='{{ @URL }}'">Вставить url</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="#" onclick="event.preventDefault();
+                                                    document.getElementById('setWebHook').submit();">Отправить url</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="#" onclick="event.preventDefault();
+                                                    document.getElementById('getWebHookInfo').submit();">Получить
+                                информацию</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /btn-group -->
+                <input type="url" class="form-control" id="url_callback_bot" name="url_callback_bot"
+                    value="{{ @setting }}">
+            </div>
+            <button class="btn btn-primary" type="submit">Сохранить</button>
+        </form>
+
+        <form action="{{ 'backend_setting_setWebHook' | alias }}" method="post" id="setWebHook">
+            <input type="hidden" name="url" value="">
+        </form>
+
+        <form action="{{ 'backend_setting_getWebHookInfo' | alias }}" method="post" id="getWebHookInfo"
+            style="display: none">
+        </form>
+    </div>
+
+</div>

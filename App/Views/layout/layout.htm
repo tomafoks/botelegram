@@ -57,7 +57,7 @@
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="/assets/admin/img/user1-128x128.jpg" alt="User Avatar"
+                                <img src="App/Views/img/user1-128x128.jpg" alt="User Avatar"
                                     class="img-size-50 mr-3 img-circle">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
@@ -74,7 +74,7 @@
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="/assets/admin/img/user8-128x128.jpg" alt="User Avatar"
+                                <img src="App/Views/img/user8-128x128.jpg" alt="User Avatar"
                                     class="img-size-50 img-circle mr-3">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
@@ -91,7 +91,7 @@
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="{{ asset('assets/admin/img/user3-128x128.jpg') }}" alt="User Avatar"
+                                <img src="App/Views/img/user3-128x128.jpg" alt="User Avatar"
                                     class="img-size-50 img-circle mr-3">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
@@ -163,8 +163,7 @@
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{ asset('assets/admin/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
-                            alt="User Image">
+                        <img src="App/Views/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">#</a>
@@ -194,13 +193,13 @@
                         <!-- Add icons to the links using the .nav-icon class
     with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ 'backend_home' | alias }}" class="nav-link">
                                 <i class="nav-icon fas fa-home text-info"></i>
                                 <p>На главную</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('admin.setting.index')}}" class="nav-link">
+                            <a href="{{ 'backend_setting' | alias }}" class="nav-link">
                                 <i class="nav-icon fas fa-key text-info"></i>
                                 <p>Настройки</p>
                             </a>
@@ -257,8 +256,8 @@
             reserved.
         </footer>
 
-        <script src="/assets/js/admin.js"></script>
-        <script src="{{ asset('assets/js/app.js') }}"></script>
+        <script src="App/Views/js/admin.js"></script>
+        <script src="App/Views/js/app.js"></script>
         <script>
             $('.nav-sidebar a').each(function () {
                 let location = window.location.protocol + '//' + window.location.host +
@@ -269,7 +268,6 @@
                     $(this).closest('.has-treeview').addClass('menu-open');
                 }
             });
-
         </script>
         <!-- Scripts -->
         <!-- Control Sidebar -->

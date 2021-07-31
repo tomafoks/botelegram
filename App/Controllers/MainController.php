@@ -6,6 +6,7 @@ class MainController extends Controller
     function render()
     {
         $template = new Template;
-        echo $template->render('home.htm');
+        $this->f3->set('content', 'home.htm');
+        echo $template->render('layout/layout.htm');
     }
 }

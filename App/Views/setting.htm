@@ -34,7 +34,7 @@
         </form>
 
         <form action="{{ 'backend_setting_setWebHook' | alias }}" method="post" id="setWebHook">
-            <input type="hidden" name="url" value="">
+            <input type="hidden" name="url_callback_bot" value="{{ @setting }}">
         </form>
 
         <form action="{{ 'backend_setting_getWebHookInfo' | alias }}" method="post" id="getWebHookInfo"

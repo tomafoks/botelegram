@@ -12,4 +12,10 @@ class Setting extends DB\SQL\Mapper
         $this->load();
         return $this->query;
     }
+
+    public function edit() {
+        $this->load();
+        $this->copyFrom('POST');
+        $this->update();
+    }
 }

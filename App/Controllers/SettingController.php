@@ -1,5 +1,6 @@
 <?php
 
+use GuzzleHttp\Client;
 
 class SettingController extends Controller
 {
@@ -12,11 +13,11 @@ class SettingController extends Controller
             array(
                 'setting' => $setting->url_callback_bot,
                 'content' => 'setting.htm',
-                'alert' => $this->f3->get('COOKIE[alert]')
+                'alert' => $this->f3->get('COOKIE[alert]'),
+                'URL', $this->f3->get('SCHEME') . '://' . $this->f3->get('HEADERS.Host')
             )
         );
-        setcookie("alert", "", time() - 3600); //удалить cookie alert
-        $this->f3->set('URL', $this->f3->get('SCHEME') . '://' . $this->f3->get('HEADERS.Host'));
+        setcookie("alert", "", time() - 3600); //удалить cookie 'alert'
         echo $template->render('layout/layout.htm');
     }
 
@@ -30,7 +31,15 @@ class SettingController extends Controller
     function setWebHook()
     {
         $url = $this->f3->get('POST.url_callback_bot');
-        $result = $this->getTelegramDate('setWebHook',  ['url' => $url]);
+        $result = $this->getTelegramDate(
+            'setwebhook',
+            [
+                'query' => [
+                    'url' => $url
+                ]
+            ]
+        );
+
         $this->f3->set('COOKIE[alert]', $result);
         $this->f3->reroute('@backend_setting');
     }
@@ -38,25 +47,14 @@ class SettingController extends Controller
     function getWebHookInfo()
     {
         $result = $this->getTelegramDate('getWebHookInfo');
-        var_dump($result);
         $this->f3->set('COOKIE[alert]', $result);
         $this->f3->reroute('@backend_setting');
     }
 
-    function getTelegramDate($method, $data = array())
+    function getTelegramDate($route = '', $params = [], $method = 'post')
     {
-        $curl = curl_init();
-
-        curl_setopt($curl, CURLOPT_URL, 'https://api.telegram.org/bot' . $this->f3->get('token') .  '/' . $method);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST'); //Отправляем через POST
-        curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $data); //Сами данные отправляемые
-
-        $out = json_encode(curl_exec($curl), true); //Получаем результат выполнения, который сразу расшифровываем из JSON'a в массив для удобства
-
-        curl_close($curl); //Закрываем курл
-
-        return $out; //Отправляем ответ в виде массива
+        $client = new Client(['base_uri' => 'https://api.telegram.org/bot' . $this->f3->get('token') . '/']);
+        $result = $client->request($method, $route, $params);
+        return (string) $result->getBody();
     }
 }

@@ -1,9 +1,11 @@
 <?php
 
-namespace Telegram\Bot\Commands;
+namespace App\Controllers\Telegram\Commands;
+use Telegram\Bot\Commands\Command;
+use Telegram\Bot\Actions;
 
 /**
- * Class HelpCommand.
+ * Class TestCommand.
  */
 class TestCommand extends Command
 {
@@ -20,7 +22,7 @@ class TestCommand extends Command
     /**
      * @var string Command Description
      */
-    protected $description = 'test command, Get a list of commands';
+    protected $description = 'Test command, Get a list of commands';
 
     /**
      * {@inheritdoc}
